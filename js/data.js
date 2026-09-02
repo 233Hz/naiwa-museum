@@ -166,7 +166,7 @@ const GALLERY_ITEMS = [
     category: "Biblical / Prophet Elijah",
     accentColor: "#F3A152",
     gradient: "linear-gradient(135deg, #2c1a0e 0%, #7d5431 50%, #f3a152 100%)",
-    image: encodeURI("assets/以利亚的献祭.png")
+    image: encodeURI("assets/以利亚的献祭.webp")
   },
   {
     id: 19,
@@ -274,7 +274,7 @@ const GALLERY_ITEMS = [
     category: "Apocalypse / Revelation",
     accentColor: "#B91C1C",
     gradient: "linear-gradient(135deg, #1a0606 0%, #5e1414 50%, #b91c1c 100%)",
-    image: encodeURI("assets/天启四骑士.png")
+    image: encodeURI("assets/天启四骑士.webp")
   },
   {
     id: 31,
@@ -310,7 +310,7 @@ const GALLERY_ITEMS = [
     category: "Sacred / Passion",
     accentColor: "#C0392B",
     gradient: "linear-gradient(135deg, #260a0c 0%, #6e1418 50%, #c0392b 100%)",
-    image: encodeURI("assets/奶撒之死.png")
+    image: encodeURI("assets/奶撒之死.webp")
   },
   {
     id: 35,
@@ -319,7 +319,7 @@ const GALLERY_ITEMS = [
     category: "Sacred / Pietà",
     accentColor: "#A8B2C1",
     gradient: "linear-gradient(135deg, #161a20 0%, #3a4250 50%, #a8b2c1 100%)",
-    image: encodeURI("assets/奶母怜子.png")
+    image: encodeURI("assets/奶母怜子.webp")
   },
   {
     id: 36,
@@ -391,7 +391,7 @@ const GALLERY_ITEMS = [
     category: "Biblical / Miracle",
     accentColor: "#40C4FF",
     gradient: "linear-gradient(135deg, #091e2e 0%, #15456b 50%, #40c4ff 100%)",
-    image: encodeURI("assets/奶龙分海.png")
+    image: encodeURI("assets/奶龙分海.webp")
   },
   {
     id: 44,
@@ -409,7 +409,7 @@ const GALLERY_ITEMS = [
     category: "History / Empire",
     accentColor: "#9B1B1B",
     gradient: "linear-gradient(135deg, #260a0c 0%, #6e1418 50%, #9b1b1b 100%)",
-    image: encodeURI("assets/奶龙帝国成立.png")
+    image: encodeURI("assets/奶龙帝国成立.webp")
   },
   {
     id: 46,
@@ -427,7 +427,7 @@ const GALLERY_ITEMS = [
     category: "Mythology / Prometheus",
     accentColor: "#E65C00",
     gradient: "linear-gradient(135deg, #2b1100 0%, #7a3100 50%, #e65c00 100%)",
-    image: encodeURI("assets/奶龙盗火.png")
+    image: encodeURI("assets/奶龙盗火.webp")
   },
   {
     id: 48,
@@ -445,7 +445,7 @@ const GALLERY_ITEMS = [
     category: "Mythology / Love",
     accentColor: "#1CA9C9",
     gradient: "linear-gradient(135deg, #091e2e 0%, #15456b 50%, #1ca9c9 100%)",
-    image: encodeURI("assets/希罗与利安得.png")
+    image: encodeURI("assets/希罗与利安得.webp")
   },
   {
     id: 50,
@@ -472,7 +472,7 @@ const GALLERY_ITEMS = [
     category: "Romanticism / Dante",
     accentColor: "#5B2C9C",
     gradient: "linear-gradient(135deg, #1c0a2e 0%, #3f1b6e 50%, #5b2c9c 100%)",
-    image: encodeURI("assets/弗朗切斯卡和保罗的影子向但丁和维吉尔显现.png")
+    image: encodeURI("assets/弗朗切斯卡和保罗的影子向但丁和维吉尔显现.webp")
   },
   {
     id: 53,
@@ -481,7 +481,7 @@ const GALLERY_ITEMS = [
     category: "Biblical / Moses",
     accentColor: "#7E8BA0",
     gradient: "linear-gradient(135deg, #161a20 0%, #3a4250 50%, #7e8ba0 100%)",
-    image: encodeURI("assets/摩西在西奈山领受律法.png")
+    image: encodeURI("assets/摩西在西奈山领受律法.webp")
   },
   {
     id: 54,
@@ -526,7 +526,7 @@ const GALLERY_ITEMS = [
     category: "Renaissance / Michelangelo",
     accentColor: "#B8860B",
     gradient: "linear-gradient(135deg, #1a1407 0%, #5e4a1b 50%, #b8860b 100%)",
-    image: encodeURI("assets/路西龙审判.png")
+    image: encodeURI("assets/路西龙审判.webp")
   },
   {
     id: 59,
@@ -535,7 +535,7 @@ const GALLERY_ITEMS = [
     category: "Celestial / The Fallen",
     accentColor: "#5E35B1",
     gradient: "linear-gradient(135deg, #1c0a2e 0%, #461b73 50%, #5e35b1 100%)",
-    image: encodeURI("assets/路西龙的眼泪.png")
+    image: encodeURI("assets/路西龙的眼泪.webp")
   },
   {
     id: 60,
