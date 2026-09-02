@@ -1,0 +1,1075 @@
+/* ==========================================================================
+   奶蛙博物馆 (FROGS MUSEUM OF FINE ART · NAIWA RETROSPECTIVE)
+   高端当代艺术馆 · 高奢策展美学系统 (Haute Fine Art Gallery Aesthetic)
+   ========================================================================== */
+
+:root {
+  --bg-deep: #060608;              /* 深邃曜石纯黑 */
+  --bg-surface: #0e0e12;           /* 展台低阶曜黑 */
+  --champagne-primary: #ded6c7;    /* 月光香槟灰金 (高定克制) */
+  --champagne-light: #f4ede2;      /* 极简铂金高光 */
+  --champagne-muted: #8c867c;      /* 沉稳冷灰金 */
+  --hairline-border: rgba(222, 214, 199, 0.16);
+  --hairline-glow: rgba(222, 214, 199, 0.32);
+  --text-pure: #fcfbfa;            /* 纯白展签名牌 */
+  --text-sub: #a09b93;            /* 冷灰策展副文本 */
+  --text-muted: #5e5b55;           /* 典藏编码弱文本 */
+  --vignette-left: rgba(6, 6, 8, 0.96);
+  --font-serif: "Songti SC", "SimSun", "STSong", "Noto Serif SC", "Cinzel", "Playfair Display", "Times New Roman", Georgia, serif;
+  --font-roman: "Cinzel", "Playfair Display", "Times New Roman", Georgia, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-deep);
+  font-family: var(--font-serif);
+  color: var(--text-pure);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   A. 高端艺术展厅开屏封面 (Haute Fine Art Splash Screen)
+   ========================================================================== */
+.splash-screen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-deep);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* 展厅微聚光射灯氛围（冷冽纯粹，告别繁重黄光） */
+.art-ambient-glow {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 50% 36%, rgba(222, 214, 199, 0.07) 0%, rgba(14, 14, 18, 0.75) 45%, #060608 85%),
+    radial-gradient(circle at 85% 15%, rgba(255, 255, 255, 0.025) 0%, transparent 42%),
+    linear-gradient(180deg, #0a0a0e 0%, #060608 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 艺术画廊极细胶片质感微噪点 */
+.art-filmic-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='galleryNoise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23galleryNoise)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+
+/* 极简高奢画廊建筑级极细框 (Haute Gallery Hairline Frame) */
+.gallery-hairline-frame {
+  position: absolute;
+  inset: 32px;
+  border: 1px solid var(--hairline-border);
+  pointer-events: none;
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+.splash-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 极简黑曜石当代策展标识 (Obsidian Art Badge) */
+.splash-art-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 26px;
+  opacity: 0;
+  animation: fadeUpIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
+  transition: opacity 0.3s ease;
+}
+
+.badge-dot {
+  width: 3.5px;
+  height: 3.5px;
+  border-radius: 50%;
+  background: var(--champagne-primary);
+  box-shadow: 0 0 8px var(--champagne-primary);
+}
+
+.badge-text {
+  font-family: var(--font-mono);
+  font-size: clamp(0.65rem, 1.05vw, 0.78rem);
+  letter-spacing: 0.38em;
+  color: var(--champagne-primary);
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+/* 主标题：奶蛙博物馆 (Haute Editorial Serif) */
+.splash-title {
+  font-family: var(--font-serif);
+  font-size: clamp(3.6rem, 8.4vw, 7.2rem);
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  line-height: 1.15;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, opacity;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.title-editorial-group {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* 标题字符从容渐入微光动效 */
+.char-editorial-fade {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(24px);
+  filter: blur(10px);
+  background: linear-gradient(180deg, #ffffff 0%, #ede7dc 40%, #ded6c7 75%, #9c9588 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: charEditorialEntrance 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--char-delay, 0.25s);
+  margin-right: 0.05em;
+}
+
+@keyframes charEditorialEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(24px);
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+}
+
+/* 极简艺术年代分割线 */
+.splash-art-divider {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+  opacity: 0;
+  animation: fadeUpIn 0.8s ease forwards 0.95s;
+  transition: opacity 0.3s ease;
+}
+
+.divider-dash {
+  width: 28px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--champagne-primary));
+}
+
+.splash-art-divider .divider-dash:last-child {
+  background: linear-gradient(to left, transparent, var(--champagne-primary));
+}
+
+.divider-year {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  color: var(--champagne-primary);
+  opacity: 0.82;
+}
+
+.splash-subtitle {
+  font-family: var(--font-serif);
+  font-size: clamp(0.86rem, 1.5vw, 1.12rem);
+  letter-spacing: 0.42em;
+  color: var(--text-sub);
+  font-weight: 500;
+  margin-top: 20px;
+  opacity: 0;
+  animation: fadeUpIn 0.8s ease forwards 1.05s;
+  will-change: opacity;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
+}
+
+/* 底部滚动展开微标 (全视口绝对居中) */
+.splash-scroll-hint {
+  position: absolute;
+  bottom: 45px;
+  left: 0;
+  right: 0;
+  margin-inline: auto;
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  opacity: 0;
+  animation: hintFadeUp 0.8s ease forwards 1.3s;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  z-index: 3;
+}
+
+.splash-scroll-hint:hover {
+  transform: translateY(-4px);
+}
+
+.splash-scroll-hint span {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 2.5px;
+  color: var(--champagne-light);
+  opacity: 0.85;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+}
+
+.scroll-mouse-icon {
+  width: 18px;
+  height: 28px;
+  border: 1px solid rgba(222, 214, 199, 0.5);
+  border-radius: 10px;
+  position: relative;
+  background: rgba(14, 14, 18, 0.6);
+  box-shadow: 0 0 12px rgba(222, 214, 199, 0.12);
+}
+
+.scroll-mouse-icon::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 5px;
+  background: var(--champagne-primary);
+  border-radius: 1px;
+  animation: wheelScroll 1.6s infinite;
+}
+
+@keyframes wheelScroll {
+  0% { transform: translate(-50%, 0); opacity: 1; }
+  100% { transform: translate(-50%, 11px); opacity: 0; }
+}
+
+@keyframes hintFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeUpIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   B. 底部中心向上扩散发光边框 (Portal Frame)
+   ========================================================================== */
+.portal-frame {
+  position: fixed;
+  inset: 100% 50% 0% 50%;
+  pointer-events: none;
+  z-index: 20;
+  border: 1px solid rgba(222, 214, 199, 0.45);
+  border-bottom: none;
+  box-shadow: 
+    0 -8px 40px rgba(222, 214, 199, 0.18),
+    0 0 20px rgba(0, 0, 0, 0.95);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  will-change: top, left, right, opacity;
+}
+
+/* ==========================================================================
+   C. 受控目标画廊容器 (Main Gallery Portal)
+   ========================================================================== */
+.gallery-portal {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 10;
+  clip-path: inset(100% 50% 0% 50% round 20px 20px 0 0);
+  will-change: clip-path;
+}
+
+.gallery-portal.is-locked {
+  pointer-events: none !important;
+}
+
+/* 顶部控制操作区（极简黑曜石玻璃拟态按钮） */
+.lux-top-controls {
+  position: absolute;
+  top: 32px;
+  right: 48px;
+  z-index: 80;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.lux-top-left-controls {
+  position: absolute;
+  top: 32px;
+  left: 48px;
+  z-index: 80;
+  display: none; /* 桌面端默认隐藏 */
+}
+
+.lux-icon-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--champagne-primary);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lux-icon-btn svg {
+  pointer-events: none;
+}
+
+.lux-icon-btn:hover {
+  color: #ffffff;
+  transform: scale(1.06);
+  box-shadow: 0 0 24px rgba(222, 214, 199, 0.25);
+}
+
+.lux-icon-btn.is-active {
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(222, 214, 199, 0.35);
+}
+
+/* 移动端侧边抽屉半透明蒙层已移除，保持背景纯净透视 */
+
+/* ==========================================================================
+   D. 全屏名画展厅画布 (Fullscreen Canvas · 黑曜石暗境聚光装裱)
+   ========================================================================== */
+.fullscreen-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  background-color: var(--bg-deep);
+}
+
+.canvas-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  will-change: transform, opacity, filter;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), filter 0.75s ease;
+}
+
+/* 1. 当前名画全屏高度模糊填充背景 (Atmospheric Blurred Canvas Backdrop) */
+.canvas-blur-backdrop {
+  position: absolute;
+  inset: -60px;
+  width: calc(100% + 120px);
+  height: calc(100% + 120px);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(64px) brightness(0.36) saturate(1.22);
+  transform: scale(1.08);
+  pointer-events: none;
+  opacity: 0.92;
+  will-change: transform, filter, opacity;
+}
+
+/* 2. 暗境展厅柔焦艺术射灯 (Directional Museum Spotlight) */
+.canvas-ambient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 60% 50%, rgba(255, 255, 255, 0.045) 0%, rgba(222, 214, 199, 0.02) 40%, transparent 70%);
+}
+
+/* 3. 原作高清主舞台容器 (上下留出充足呼吸边距，居中展示) */
+.canvas-artwork-wrapper {
+  position: absolute;
+  left: 320px;
+  right: 64px;
+  top: 64px;
+  bottom: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  pointer-events: none;
+  box-sizing: border-box;
+}
+
+.canvas-artwork-frame {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+/* 4. 完整名画纯粹展示：现代顶级美术馆悬浮装裱 (Floating Shadowbox Mounting) */
+.canvas-artwork-img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 
+    0 28px 80px -12px rgba(0, 0, 0, 0.96),
+    0 12px 32px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(255, 255, 255, 0.12);
+  filter: brightness(0.99) contrast(1.02);
+  will-change: transform, opacity;
+  pointer-events: auto;
+  background-color: #0c0b0e;
+}
+
+/* 保护左侧标签易读性的深邃曜石微暗角 */
+.canvas-vignette {
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(to right, rgba(6, 6, 8, 0.95) 0%, rgba(6, 6, 8, 0.72) 240px, rgba(6, 6, 8, 0.2) 360px, transparent 480px),
+    radial-gradient(circle at 65% 50%, transparent 45%, rgba(6, 6, 8, 0.65) 100%);
+  pointer-events: none;
+}
+
+/* 典藏油彩颗粒微噪点 */
+.canvas-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.035;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* 画布层流转动画 */
+.canvas-layer.layer-enter-down {
+  opacity: 0;
+  transform: translateY(-36px) scale(1.03);
+  filter: blur(8px);
+}
+
+.canvas-layer.layer-enter-up {
+  opacity: 0;
+  transform: translateY(36px) scale(1.03);
+  filter: blur(8px);
+}
+
+.canvas-layer.layer-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+  z-index: 1;
+}
+
+.canvas-layer.layer-exit-up {
+  opacity: 0;
+  transform: translateY(-36px) scale(0.98);
+  filter: blur(8px);
+  z-index: 0;
+}
+
+.canvas-layer.layer-exit-down {
+  opacity: 0;
+  transform: translateY(36px) scale(0.98);
+  filter: blur(8px);
+  z-index: 0;
+}
+
+/* ==========================================================================
+   E. 展厅悬浮交互界面 (Interface Frame)
+   ========================================================================== */
+.lux-interface {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 32px 48px;
+  pointer-events: none;
+}
+
+.lux-interface * {
+  pointer-events: auto;
+}
+
+.lux-body {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* --------------------------------------------------------------------------
+   左侧大弧度纯标签容器 (高端艺术展签目录)
+   -------------------------------------------------------------------------- */
+.left-arc-container {
+  position: relative;
+  width: 320px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 15;
+  margin-left: -24px;
+}
+
+/* 极细金色弧线参考虚线 */
+.arc-guide-path {
+  position: absolute;
+  left: 0px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 140px;
+  height: 85%;
+  pointer-events: none;
+  color: var(--champagne-primary);
+  opacity: 0.18;
+}
+
+.arc-stage-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  cursor: grab;
+}
+
+.arc-stage-wrapper.is-dragging {
+  cursor: grabbing;
+}
+
+.arc-track {
+  position: absolute;
+  left: 0px;
+  top: 50%;
+  width: 300px;
+  height: 0;
+}
+
+/* 纯标签项：极简当代画廊展品标签 */
+.arc-label-item {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 6px 10px;
+  white-space: nowrap;
+  cursor: pointer;
+  transform-origin: left center;
+  will-change: transform, opacity;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 标签指示微细光点 */
+.label-indicator-line {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(222, 214, 199, 0.3);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 等宽双位数字编号 (01 ~ 16) */
+.label-index {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: var(--champagne-muted);
+  opacity: 0.75;
+  transition: all 0.3s ease;
+}
+
+/* 典雅中文标题 */
+.label-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 400;
+  letter-spacing: 2px;
+  color: var(--text-sub);
+  transition: all 0.3s ease;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95);
+}
+
+/* 激活状态：极细香槟铂金光条与纯净白光标题 */
+.arc-label-item.is-active {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.arc-label-item.is-active .label-indicator-line {
+  width: 32px;
+  height: 1.5px;
+  border-radius: 1px;
+  background: var(--champagne-primary);
+  box-shadow: 0 0 12px rgba(222, 214, 199, 0.5);
+}
+
+.arc-label-item.is-active .label-index {
+  color: #ffffff;
+  font-weight: 700;
+  opacity: 1;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
+}
+
+.arc-label-item.is-active .label-title {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1.35rem;
+  letter-spacing: 2.2px;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.25), 0 2px 14px rgba(0, 0, 0, 0.95);
+}
+
+/* ==========================================================================
+   F. 响应式适配
+   ========================================================================== */
+@media (max-width: 768px) {
+  .lux-interface {
+    padding: 16px 20px;
+  }
+
+  /* 移动端左上角菜单按钮与右上角退出按钮位置 */
+  .lux-top-left-controls {
+    display: flex;
+    top: 18px;
+    left: 18px;
+    z-index: 80;
+  }
+
+  .lux-top-controls {
+    top: 18px;
+    right: 18px;
+    z-index: 80;
+  }
+
+  /* 移动端左侧标签页：默认隐藏，展开时透明悬浮无面板背景无标题 */
+  .left-arc-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 290px;
+    max-width: 84vw;
+    height: 100%;
+    margin-left: 0;
+    z-index: 70;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    transform: translateX(-100%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none !important;
+    transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease, visibility 0.38s ease;
+    display: flex;
+    align-items: center;
+    overflow: visible;
+  }
+
+  /* 标签页展开激活态：平滑滑入，悬浮于画作之上 */
+  .left-arc-container.is-open {
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  /* 移动端标签与文字阴影强化，确保在任何名画背景上清晰易读 */
+  .left-arc-container .label-index {
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.95), 0 0 12px rgba(0, 0, 0, 0.8);
+  }
+
+  .left-arc-container .label-title {
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95), 0 0 16px rgba(0, 0, 0, 0.85);
+  }
+
+  .left-arc-container.is-open .arc-label-item.is-active .label-title {
+    text-shadow: 0 0 22px rgba(255, 255, 255, 0.3), 0 2px 14px rgba(0, 0, 0, 0.95);
+  }
+
+  /* 内部舞台与轨道触摸居中 */
+  .left-arc-container .arc-stage-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    touch-action: none;
+  }
+
+  .left-arc-container .arc-track {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    width: 260px;
+    height: 0;
+    touch-action: none;
+  }
+
+  /* 移动端主画面展台完全舒展居中，上下留出舒适呼吸边距 */
+  .canvas-artwork-wrapper {
+    left: 20px;
+    right: 20px;
+    top: 80px;
+    bottom: 48px;
+  }
+
+  .arc-guide-path {
+    display: none;
+  }
+
+  .splash-title {
+    font-size: clamp(2.6rem, 12vw, 4.5rem);
+    letter-spacing: 0.18em;
+  }
+
+  .gallery-hairline-frame {
+    inset: 16px;
+  }
+}
+
+/* ==========================================================================
+   G. 全部展品总览网格视图 (All-Works Grid Overview)
+   ========================================================================== */
+.grid-gallery {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 30;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(222, 214, 199, 0.06) 0%, transparent 55%),
+    linear-gradient(180deg, #0a0a0e 0%, #060608 100%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s ease;
+}
+
+.grid-gallery.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.grid-gallery-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.grid-gallery-header {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 38px 56px 22px;
+  border-bottom: 1px solid var(--hairline-border);
+  background: linear-gradient(180deg, rgba(6, 6, 8, 0.92) 0%, rgba(6, 6, 8, 0.55) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.grid-gallery-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3vw, 2.3rem);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--text-pure);
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9);
+}
+
+.grid-gallery-sub {
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  color: var(--champagne-primary);
+  opacity: 0.82;
+  text-transform: uppercase;
+}
+
+.grid-gallery-scroll {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 30px 56px 64px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.grid-gallery-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+.grid-gallery-scroll::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+}
+.grid-gallery-scroll::-webkit-scrollbar-thumb {
+  background: rgba(222, 214, 199, 0.25);
+  border-radius: 6px;
+}
+.grid-gallery-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(222, 214, 199, 0.45);
+}
+
+.grid-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 22px;
+}
+
+.grid-card {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--bg-surface);
+  border: 1px solid var(--hairline-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+  will-change: transform;
+}
+
+.grid-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--champagne-primary);
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.8), 0 0 22px rgba(222, 214, 199, 0.18);
+}
+
+.grid-card-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #0c0b0e;
+}
+
+.grid-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  filter: brightness(0.92) contrast(1.02);
+}
+
+.grid-card:hover .grid-card-img {
+  transform: scale(1.06);
+  filter: brightness(1.02) contrast(1.04);
+}
+
+/* 加载失败时的占位底色（使用展项主题色） */
+.grid-card-img.is-broken {
+  object-fit: contain;
+  background: var(--card-fallback, #1a1a20);
+  opacity: 0.85;
+}
+
+.grid-card-meta {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 26px 14px 12px;
+  background: linear-gradient(180deg, transparent 0%, rgba(6, 6, 8, 0.85) 60%, rgba(6, 6, 8, 0.96) 100%);
+  pointer-events: none;
+}
+
+.grid-card-index {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 2px;
+  color: var(--champagne-primary);
+  opacity: 0.85;
+}
+
+.grid-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-pure);
+  margin-top: 3px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.grid-card-sub {
+  font-family: var(--font-serif);
+  font-size: 0.74rem;
+  color: var(--text-sub);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================================================
+   H. 背景音乐全局开关按钮 (Background Music Toggle)
+   ========================================================================== */
+.music-toggle-btn {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  z-index: 100;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 18px 11px 14px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--champagne-primary);
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: var(--font-mono);
+  letter-spacing: 0.12em;
+}
+
+.music-toggle-btn:hover {
+  color: #ffffff;
+  transform: scale(1.04);
+  box-shadow: 0 0 24px rgba(222, 214, 199, 0.22);
+}
+
+.music-icon {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
+
+.music-icon svg {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.25s ease;
+}
+
+/* 默认显示“关”图标；播放态显示“开”图标 */
+.icon-music-on { opacity: 0; }
+.icon-music-off { opacity: 1; }
+
+.music-toggle-btn.is-playing {
+  color: #fff;
+  box-shadow: 0 0 22px rgba(222, 214, 199, 0.3);
+}
+.music-toggle-btn.is-playing .icon-music-on { opacity: 1; }
+.music-toggle-btn.is-playing .icon-music-off { opacity: 0; }
+
+.music-label {
+  font-size: 0.78rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* 播放中的均衡器动效（暗示正在播放） */
+.music-eq {
+  display: none;
+  align-items: flex-end;
+  gap: 2px;
+  height: 14px;
+}
+.music-toggle-btn.is-playing .music-eq { display: inline-flex; }
+.music-eq i {
+  width: 3px;
+  height: 5px;
+  background: currentColor;
+  border-radius: 1px;
+  animation: musicEq 0.9s ease-in-out infinite;
+}
+.music-eq i:nth-child(2) { animation-delay: 0.15s; }
+.music-eq i:nth-child(3) { animation-delay: 0.3s; }
+.music-eq i:nth-child(4) { animation-delay: 0.45s; }
+
+@keyframes musicEq {
+  0%, 100% { height: 4px; opacity: 0.55; }
+  50% { height: 14px; opacity: 1; }
+}
+
+/* ==========================================================================
+   I. 网格视图移动端适配
+   ========================================================================== */
+@media (max-width: 768px) {
+  .grid-gallery-header {
+    padding: 22px 20px 16px;
+  }
+  .grid-gallery-scroll {
+    padding: 20px 16px 80px;
+  }
+  .grid-gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 14px;
+  }
+  .grid-card-title { font-size: 0.92rem; }
+  .music-toggle-btn {
+    right: 16px;
+    bottom: 16px;
+    padding: 10px 14px 10px 12px;
+  }
+  .music-label { font-size: 0.72rem; }
+}

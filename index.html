@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>奶蛙博物馆 - 高端艺术典藏特展</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
+</head>
+<body>
+
+  <!-- A. 高端艺术画廊开屏首页 (Splash Screen / Haute Art Gallery Intro) -->
+  <section id="splash-screen" class="splash-screen splash-art-gallery">
+    <!-- 高端展厅深邃黑曜光影与极细胶片微噪点 -->
+    <div class="art-ambient-glow"></div>
+    <div class="art-filmic-grain"></div>
+
+    <!-- 极简高定艺术画廊极细线框 (Haute Gallery Hairline Frame) -->
+    <div class="gallery-hairline-frame"></div>
+
+    <div class="splash-content">
+      <!-- 极简黑曜石当代策展标识 -->
+      <div class="splash-art-badge">
+        <span class="badge-dot"></span>
+        <span class="badge-text">FROGS MUSEUM // HAUTE CONTEMPORARY RETROSPECTIVE</span>
+        <span class="badge-dot"></span>
+      </div>
+      
+      <!-- 网站名称：奶蛙博物馆（冷冽铂金流光质感，高雅渐入） -->
+      <h1 class="splash-title" id="splash-title">奶蛙博物馆</h1>
+
+      <!-- 极简艺术年代分割标 -->
+      <div class="splash-art-divider">
+        <span class="divider-dash"></span>
+        <span class="divider-year">OBSIDIAN COLLECTION // 2026</span>
+        <span class="divider-dash"></span>
+      </div>
+      
+      <!-- 艺术策展副标题 -->
+      <p class="splash-subtitle" id="splash-subtitle">传世名作拟态艺术 · 黑曜石全景沉浸特展</p>
+    </div>
+
+    <!-- 底部滚动探索微标（从底部中心向上展开） -->
+    <div class="splash-scroll-hint" id="splash-hint" title="向下滚动开启特展">
+      <div class="scroll-mouse-icon"></div>
+      <span>向下滚动 · 启幕特展 / SCROLL TO EXPLORE</span>
+    </div>
+  </section>
+
+  <!-- B. 极简金芒视窗边框 (从底部中心向上方发散扩展) -->
+  <div id="portal-frame" class="portal-frame"></div>
+
+  <!-- C. 目标实际页面：主全屏画廊受控视窗 (由底部中心向上四周扩散铺满) -->
+  <div id="main-gallery-portal" class="gallery-portal">
+
+    <!-- 1. 全屏沉浸画布容器 (100vw x 100vh) -->
+    <div class="fullscreen-canvas" id="fullscreen-canvas">
+      <!-- 由 js/app.js 动态管理全屏背景层与双缓冲视差过渡 -->
+    </div>
+
+    <!-- 2. 界面悬浮交互骨架 -->
+    <div class="lux-interface">
+      <!-- 左上角菜单按钮 (移动端默认展示，用于展开/隐藏目录) -->
+      <div class="lux-top-left-controls">
+        <button class="lux-icon-btn btn-menu-toggle" id="btn-menu-toggle" title="展开/隐藏展品目录" aria-label="展开/隐藏展品目录">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- 右上角：展品总览网格 + 退出至开屏首页按钮 (极简轻奢徽钮) -->
+      <div class="lux-top-controls">
+        <button class="lux-icon-btn btn-grid-toggle" id="btn-grid-toggle" title="展开全部展品总览" aria-label="全部展品总览">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+            <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+            <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+            <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+          </svg>
+        </button>
+        <button class="lux-icon-btn btn-exit-splash" id="btn-exit-splash" title="退出特展返回首页" aria-label="返回首页">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div class="lux-body">
+        <!-- 左侧大弧度纯标签目录 (移动端透明无背景无标题) -->
+        <aside class="left-arc-container" id="left-arc-container">
+          <!-- 极细弧线参考轨道 -->
+          <svg class="arc-guide-path" viewBox="0 0 140 800" fill="none" preserveAspectRatio="none">
+            <path d="M 46 55 Q 85 400 46 745" stroke="currentColor" stroke-width="1.5" stroke-dasharray="3 6" opacity="0.25"/>
+          </svg>
+
+          <div class="arc-stage-wrapper" id="arc-stage-wrapper">
+            <div class="arc-track" id="arc-track">
+              <!-- 纯标签项将由 ArcCarousel 动态计算坐标挂载 -->
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- D. 全部展品总览网格视图 (All-Works Grid Overview) -->
+  <section id="grid-gallery" class="grid-gallery" aria-hidden="true">
+    <div class="grid-gallery-inner">
+      <header class="grid-gallery-header">
+        <div class="grid-header-titles">
+          <h2 class="grid-gallery-title">全部展品总览</h2>
+          <p class="grid-gallery-sub" id="grid-gallery-count">共 0 幅典藏 · FROGS MUSEUM COLLECTION</p>
+        </div>
+        <button class="lux-icon-btn btn-grid-close" id="btn-grid-close" title="返回沉浸展厅" aria-label="返回沉浸展厅">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </header>
+      <div class="grid-gallery-scroll" id="grid-gallery-scroll">
+        <div class="grid-gallery-grid" id="grid-gallery-grid">
+          <!-- 展品卡片由 js/app.js 动态生成 -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- E. 背景音乐与全局开关 -->
+  <audio id="bg-music" src="assets/人鱼的眼泪dj降调版.mp3" loop preload="auto"></audio>
+  <button id="music-toggle" class="music-toggle-btn" title="开启 / 关闭背景音乐" aria-label="背景音乐开关" aria-pressed="false">
+    <span class="music-icon" aria-hidden="true">
+      <svg class="icon-music-off" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 18V5l12-2v13"></path>
+        <circle cx="6" cy="18" r="3"></circle>
+        <circle cx="18" cy="16" r="3"></circle>
+        <line x1="3" y1="3" x2="21" y2="21"></line>
+      </svg>
+      <svg class="icon-music-on" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 18V5l12-2v13"></path>
+        <circle cx="6" cy="18" r="3"></circle>
+        <circle cx="18" cy="16" r="3"></circle>
+      </svg>
+    </span>
+    <span class="music-label" id="music-label">音乐：关</span>
+    <span class="music-eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  </button>
+
+  <!-- 脚本加载 -->
+  <script src="js/data.js"></script>
+  <script src="js/arc-carousel.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/splash.js"></script>
+</body>
+</html>
