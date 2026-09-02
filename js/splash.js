@@ -1,14 +1,14 @@
 /**
- * 奶蛙博物馆 - Splash 启幕与底部中心向上扩散视窗引擎
+ * 奶蛙博物馆 - Splash 启幕与视差滚动揭示引擎
  * 
  * 核心逻辑：
  * 1. 博物馆标题“奶蛙博物馆”字形逐字跳跃/依次浮现入场动画
- * 2. 鼠标滚轮驱动展开进度
- * 3. 画面扩散中心点锁定于【屏幕底部中心 (X: 50%, Y: 100%)】
- *    从底部中心向四周及上方同步扩散放大，直至铺满整个视口
- * 4. 矩形内部实时展示目标画廊页面真实内容，扩散过程平滑连贯无跳变
- * 5. 扩散未完成前画廊内部完全静止不响应滚动 (isSplashActive 状态锁)
- * 6. 右上角提供退出按钮，点击后反转动画缩回底部中心退出至开屏首页
+ * 2. 鼠标滚轮 / 触摸驱动滚动进度
+ * 3. 开屏作为前景层整体向上滚出，露出底层真实画廊（视差滚动揭示）
+ * 4. 开屏内部多层（氛围光 / 胶片颗粒 / 极细框 / 文字内容）以不同速度位移，
+ *    形成纵深差速的视差效果
+ * 5. 揭示未完成前画廊内部完全静止不响应滚动 (isSplashActive 状态锁)
+ * 6. 右上角提供退出按钮，点击后反转视差滚动退回开屏首页
  */
 
 (function () {
@@ -21,8 +21,6 @@
 
   const splashScreen = document.getElementById('splash-screen');
   const splashTitle = document.getElementById('splash-title');
-  const splashSubtitle = document.getElementById('splash-subtitle');
-  const splashBadge = document.querySelector('.splash-art-badge') || document.querySelector('.classical-crest') || document.querySelector('.splash-museum-badge');
   const splashHint = document.getElementById('splash-hint');
   const galleryPortal = document.getElementById('main-gallery-portal');
   const portalFrame = document.getElementById('portal-frame');
@@ -51,56 +49,14 @@
   }
 
   /**
-   * 2. 更新矩形从【屏幕底部中心】向四周及上方扩散/收缩进度
+   * 2. 视差滚动揭示：首屏保持静止，预览页（画廊）从视口下方整体上滑覆盖首屏
    */
   function updatePortal(progress) {
     const P = Math.max(0, Math.min(1, progress));
 
-    // 几何公式：中心点位于底部中心 (X: 50%, Y: 100%)
-    // P=0 时：顶部缩进 100%，左右各缩进 50%，底部缩进 0% -> 尺寸为 0 汇聚于底部中心
-    // P=1 时：顶部缩进 0%，左右各缩进 0%，底部缩进 0% -> 完整覆盖整个视口
-    const insetTop = (1 - P) * 100;
-    const insetX = (1 - P) * 50;
-    const insetBottom = 0;
-    const radiusTop = (1 - P) * 20;
-
-    // 实时裁剪目标画廊矩形视窗
-    galleryPortal.style.clipPath = `inset(${insetTop.toFixed(3)}% ${insetX.toFixed(3)}% ${insetBottom.toFixed(3)}% ${insetX.toFixed(3)}% round ${radiusTop.toFixed(1)}px ${radiusTop.toFixed(1)}px 0 0)`;
-
-    // 同步古典金发光外框 (从底部向上升起扩展)
-    if (portalFrame) {
-      if (P > 0.005 && P < 0.995) {
-        portalFrame.style.opacity = '1';
-        portalFrame.style.top = `${insetTop.toFixed(3)}%`;
-        portalFrame.style.bottom = '0%';
-        portalFrame.style.left = `${insetX.toFixed(3)}%`;
-        portalFrame.style.right = `${insetX.toFixed(3)}%`;
-        portalFrame.style.borderRadius = `${radiusTop.toFixed(1)}px ${radiusTop.toFixed(1)}px 0 0`;
-      } else {
-        portalFrame.style.opacity = '0';
-      }
-    }
-
-    // 开屏文字淡出与淡入
-    if (splashTitle) {
-      const textOpacity = Math.max(0, 1 - P * 2.2);
-      const textTranslateY = -P * 40;
-      const textScale = 1 + P * 0.08;
-      splashTitle.style.opacity = textOpacity.toFixed(3);
-      splashTitle.style.transform = `translateY(${textTranslateY.toFixed(1)}px) scale(${textScale.toFixed(3)})`;
-    }
-
-    if (splashBadge) {
-      splashBadge.style.opacity = Math.max(0, 1 - P * 2.6).toFixed(3);
-    }
-
-    if (splashSubtitle) {
-      splashSubtitle.style.opacity = Math.max(0, 1 - P * 2.8).toFixed(3);
-    }
-
-    if (splashHint) {
-      splashHint.style.opacity = Math.max(0, 1 - P * 3.5).toFixed(3);
-    }
+    // 开屏完全静止，不做任何位移；仅由预览页上滑覆盖
+    // 预览页从下方 (translateY 100%) 平滑上滑至铺满 (translateY 0%)，形成从下向上的揭示
+    galleryPortal.style.transform = `translateY(${((1 - P) * 100).toFixed(2)}%)`;
   }
 
   /**
@@ -146,8 +102,8 @@
     currentProgress = 1.0;
     targetProgress = 1.0;
 
-    galleryPortal.style.clipPath = 'none';
     galleryPortal.classList.remove('is-locked');
+    galleryPortal.style.transform = 'translateY(0)';
     splashScreen.style.display = 'none';
     if (portalFrame) portalFrame.style.display = 'none';
 
@@ -178,10 +134,6 @@
 
     galleryPortal.classList.add('is-locked');
     splashScreen.style.display = 'flex';
-    if (portalFrame) {
-      portalFrame.style.display = 'block';
-      portalFrame.style.opacity = '1';
-    }
 
     targetProgress = 0.0;
 

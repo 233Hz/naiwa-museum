@@ -53,6 +53,7 @@ html, body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  will-change: transform, opacity;
 }
 
 /* 展厅微聚光射灯氛围（冷冽纯粹，告别繁重黄光） */
@@ -296,21 +297,10 @@ html, body {
 }
 
 /* ==========================================================================
-   B. 底部中心向上扩散发光边框 (Portal Frame)
+   B. 底部中心向上扩散发光边框 (已弃用：视差滚动取代中心扩散)
    ========================================================================== */
 .portal-frame {
-  position: fixed;
-  inset: 100% 50% 0% 50%;
-  pointer-events: none;
-  z-index: 20;
-  border: 1px solid rgba(222, 214, 199, 0.45);
-  border-bottom: none;
-  box-shadow: 
-    0 -8px 40px rgba(222, 214, 199, 0.18),
-    0 0 20px rgba(0, 0, 0, 0.95);
-  opacity: 0;
-  transition: opacity 0.15s ease;
-  will-change: top, left, right, opacity;
+  display: none;
 }
 
 /* ==========================================================================
@@ -322,9 +312,10 @@ html, body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  z-index: 10;
-  clip-path: inset(100% 50% 0% 50% round 20px 20px 0 0);
-  will-change: clip-path;
+  background-color: var(--bg-deep); /* 上滑覆盖开屏时不透底 */
+  z-index: 6; /* 置于开屏之上，作为从下向上滑入的预览页 */
+  will-change: transform;
+  transform: translateY(100%); /* 初始位于视口下方，由 JS 滚动上滑揭示 */
 }
 
 .gallery-portal.is-locked {
