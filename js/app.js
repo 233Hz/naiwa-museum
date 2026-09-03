@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /**
    * 创建黑曜石高定暗境画布层 (Obsidian Canvas Layer)
-   * 包含当前名画高度模糊填充背景与中心原作悬浮装裱
+   * 包含当前名画高度模糊填充背景与中心原作悬浮装裱，以及弱网/慢网艺术加载动效
    */
   function createCanvasLayer(item) {
     const layer = document.createElement('div');
@@ -34,12 +34,87 @@ document.addEventListener('DOMContentLoaded', () => {
       <div class="canvas-ambient"></div>
       <div class="canvas-artwork-wrapper">
         <div class="canvas-artwork-frame">
+          <div class="canvas-loader" aria-live="polite">
+            <div class="loader-shimmer"></div>
+            <div class="loader-content">
+              <div class="haute-spinner" aria-hidden="true">
+                <span class="spinner-ring ring-outer"></span>
+                <span class="spinner-ring ring-inner"></span>
+                <span class="spinner-core"></span>
+              </div>
+              <div class="loader-text">
+                <span class="loader-badge">MUSEUM ARCHIVE</span>
+                <span class="loader-title">典藏名作载入中</span>
+                <span class="loader-sub">HIGH-RESOLUTION ARTWORK</span>
+              </div>
+            </div>
+            <div class="loader-error">
+              <div class="error-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+              </div>
+              <div class="error-title">网络信号不佳 · 典藏未能加载</div>
+              <div class="error-sub">当前网络环境较弱，请轻触下方重新载入</div>
+              <button class="loader-retry-btn" type="button">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="23 4 23 10 17 10"></polyline>
+                  <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                </svg>
+                重新尝试载入
+              </button>
+            </div>
+          </div>
           <img class="canvas-artwork-img" src="${bgUrl}" alt="${item.title}">
         </div>
       </div>
       <div class="canvas-vignette"></div>
       <div class="canvas-grain"></div>
     `;
+
+    const img = layer.querySelector('.canvas-artwork-img');
+    const loader = layer.querySelector('.canvas-loader');
+    const backdrop = layer.querySelector('.canvas-blur-backdrop');
+    const retryBtn = layer.querySelector('.loader-retry-btn');
+
+    function onImageLoaded() {
+      if (loader) loader.classList.add('is-hidden');
+      if (img) img.classList.add('is-loaded');
+      if (backdrop) backdrop.classList.add('is-loaded');
+    }
+
+    function onImageError() {
+      if (loader) {
+        loader.classList.remove('is-hidden');
+        loader.classList.add('is-error');
+      }
+      if (img) img.classList.remove('is-loaded');
+    }
+
+    if (img) {
+      if (img.complete && img.naturalWidth !== 0) {
+        onImageLoaded();
+      } else {
+        img.addEventListener('load', onImageLoaded);
+        img.addEventListener('error', onImageError);
+      }
+    }
+
+    if (retryBtn) {
+      retryBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (loader) loader.classList.remove('is-error');
+        if (img) {
+          const originalSrc = item.image;
+          img.src = '';
+          setTimeout(() => {
+            img.src = originalSrc + (originalSrc.includes('?') ? '&' : '?') + '_t=' + Date.now();
+          }, 80);
+        }
+      });
+    }
 
     return layer;
   }
@@ -164,8 +239,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
       card.innerHTML = `
         <div class="grid-card-img-wrap">
-          <img class="grid-card-img" src="${item.image}" alt="${item.title}" loading="lazy"
-               onerror="this.classList.add('is-broken'); this.removeAttribute('src');">
+          <div class="grid-card-skeleton">
+            <div class="grid-skeleton-shimmer"></div>
+            <div class="grid-skeleton-spinner"></div>
+          </div>
+          <img class="grid-card-img" src="${item.image}" alt="${item.title}" loading="lazy">
+          <div class="grid-card-error">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+            <span class="grid-card-error-text">弱网载入失败</span>
+            <button class="grid-card-retry-btn" type="button">点击重试</button>
+          </div>
         </div>
         <div class="grid-card-meta">
           <div class="grid-card-index">${formattedIndex}</div>
@@ -174,8 +261,52 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       `;
 
+      const imgWrap = card.querySelector('.grid-card-img-wrap');
+      const img = card.querySelector('.grid-card-img');
+      const retryBtn = card.querySelector('.grid-card-retry-btn');
+
+      function handleImgLoad() {
+        if (imgWrap) {
+          imgWrap.classList.remove('is-error');
+          imgWrap.classList.add('is-loaded');
+        }
+      }
+
+      function handleImgError() {
+        if (imgWrap) {
+          imgWrap.classList.remove('is-loaded');
+          imgWrap.classList.add('is-error');
+        }
+      }
+
+      if (img) {
+        if (img.complete && img.naturalWidth !== 0) {
+          handleImgLoad();
+        } else {
+          img.addEventListener('load', handleImgLoad);
+          img.addEventListener('error', handleImgError);
+        }
+      }
+
+      if (retryBtn) {
+        retryBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (imgWrap) {
+            imgWrap.classList.remove('is-error');
+          }
+          if (img) {
+            const originalSrc = item.image;
+            img.src = '';
+            setTimeout(() => {
+              img.src = originalSrc + (originalSrc.includes('?') ? '&' : '?') + '_t=' + Date.now();
+            }, 80);
+          }
+        });
+      }
+
       // 点击卡片：定位到沉浸展厅对应展品
-      card.addEventListener('click', () => {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('.grid-card-retry-btn')) return;
         openGrid(false);
         if (carousel && typeof carousel.goToIndex === 'function') {
           carousel.goToIndex(index);
@@ -363,4 +494,47 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }, { passive: true });
+
+  // ==========================================================================
+  // 全局弱网/离线感知通知 (Network Monitor Toast)
+  // ==========================================================================
+  function initNetworkMonitor() {
+    let toast = document.getElementById('net-status-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'net-status-toast';
+      toast.className = 'net-status-toast';
+      document.body.appendChild(toast);
+    }
+
+    let hideTimer = null;
+    function showToast(message, type = 'warning', duration = 3800) {
+      if (!toast) return;
+      clearTimeout(hideTimer);
+      toast.className = `net-status-toast toast-${type} is-show`;
+      toast.innerHTML = `<span class="toast-dot"></span><span>${message}</span>`;
+
+      hideTimer = setTimeout(() => {
+        toast.classList.remove('is-show');
+      }, duration);
+    }
+
+    window.addEventListener('offline', () => {
+      showToast('网络连接已断开，正展示本地典藏缓存', 'warning', 4500);
+    });
+
+    window.addEventListener('online', () => {
+      showToast('网络连接已恢复，高清画作已同步', 'success', 3000);
+    });
+
+    // 智能检测 Slow 2G / 2G / 3G 弱网连接 (如果浏览器支持 Network Information API)
+    if ('connection' in navigator) {
+      const conn = navigator.connection;
+      if (conn && (conn.effectiveType === '2g' || conn.effectiveType === 'slow-2g')) {
+        showToast('检测到当前网络信号较弱，已开启典藏加载保护', 'warning', 4000);
+      }
+    }
+  }
+
+  initNetworkMonitor();
 });
