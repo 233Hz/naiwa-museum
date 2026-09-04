@@ -119,33 +119,101 @@ document.addEventListener('DOMContentLoaded', () => {
     return layer;
   }
 
+  // 维护正在执行退出过渡的图层集合
+  const exitingLayers = new Set();
+
   /**
-   * 全屏视差画布流转切换
+   * 安全并彻底从 DOM 清理指定的图层
+   * @param {HTMLElement} layer
+   */
+  function removeCanvasLayer(layer) {
+    if (!layer) return;
+    exitingLayers.delete(layer);
+    if (layer._cleanupTimer) {
+      clearTimeout(layer._cleanupTimer);
+      layer._cleanupTimer = null;
+    }
+    if (layer._onTransitionEnd) {
+      layer.removeEventListener('transitionend', layer._onTransitionEnd);
+      layer._onTransitionEnd = null;
+    }
+    if (layer.parentNode === canvasContainer) {
+      canvasContainer.removeChild(layer);
+    }
+  }
+
+  /**
+   * 清理除当前 activeCanvasLayer 之外的所有历史图层（用于处理快速连续切换时的堆叠残留）
+   */
+  function pruneStaleLayers() {
+    exitingLayers.forEach(layer => {
+      removeCanvasLayer(layer);
+    });
+    Array.from(canvasContainer.children).forEach(child => {
+      if (child !== activeCanvasLayer && !exitingLayers.has(child)) {
+        removeCanvasLayer(child);
+      }
+    });
+  }
+
+  /**
+   * 全屏沉浸纵向视差推入流转切换
    * @param {number} newIndex - 新项索引
-   * @param {number} direction - 移动方向 (+1 向下，-1 向上)
+   * @param {number} direction - 移动方向 (+1 向下切换，-1 向上切换)
    */
   function updateGallery(newIndex, direction = 1) {
     const item = GALLERY_ITEMS[newIndex];
     if (!item) return;
 
-    // 全屏背景层双缓冲视差平滑过渡
+    // 1. 如果此前有快速切换积压的旧退出层，立即清理，杜绝多层重叠与残影
+    pruneStaleLayers();
+
+    // 2. 创建新画布图层
     const newLayer = createCanvasLayer(item);
-    newLayer.classList.add(direction > 0 ? 'layer-enter-down' : 'layer-enter-up');
+    // direction > 0: 向下切换，新层从下方(100%)向上推入
+    // direction < 0: 向上切换，新层从上方(-100%)向下推入
+    const enterClass = direction > 0 ? 'layer-enter-from-bottom' : 'layer-enter-from-top';
+    newLayer.classList.add(enterClass);
     canvasContainer.appendChild(newLayer);
 
+    // 强制回流以保证初始推入位置生效
     void newLayer.offsetWidth;
+
+    // 3. 激活新图层推入动画
+    newLayer.classList.remove(enterClass);
     newLayer.classList.add('layer-active');
 
+    // 4. 旧图层执行视差推离动画 (差速后退与微暗化)
     if (activeCanvasLayer) {
       const oldLayer = activeCanvasLayer;
-      oldLayer.classList.add(direction > 0 ? 'layer-exit-up' : 'layer-exit-down');
+      exitingLayers.add(oldLayer);
+
+      const exitClass = direction > 0 ? 'layer-exit-to-top' : 'layer-exit-to-bottom';
       oldLayer.classList.remove('layer-active');
-      setTimeout(() => {
-        if (oldLayer.parentNode === canvasContainer) {
-          canvasContainer.removeChild(oldLayer);
+      oldLayer.classList.add(exitClass);
+
+      // 安全清理回调
+      let cleaned = false;
+      const onEnd = (e) => {
+        // 确保监听的是 layer 本身的 transform 过渡，防止内部子元素冒泡导致提前移除
+        if (e && e.target !== oldLayer) return;
+        if (cleaned) return;
+        cleaned = true;
+        removeCanvasLayer(oldLayer);
+      };
+
+      oldLayer._onTransitionEnd = onEnd;
+      oldLayer.addEventListener('transitionend', onEnd);
+
+      // 820ms 超时兜底（比 780ms 过渡稍长），确保即使极端情况下事件未触发也 100% 安全移除
+      oldLayer._cleanupTimer = setTimeout(() => {
+        if (!cleaned) {
+          cleaned = true;
+          removeCanvasLayer(oldLayer);
         }
-      }, 700);
+      }, 820);
     }
+
     activeCanvasLayer = newLayer;
   }
 

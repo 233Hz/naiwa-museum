@@ -79,6 +79,55 @@ html, body {
   z-index: 1;
 }
 
+/* 标题居中柔和聚光光晕与微光呼吸 */
+.splash-spotlight-halo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -52%);
+  width: min(720px, 92vw);
+  height: min(720px, 92vw);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(222, 214, 199, 0.08) 0%, rgba(222, 214, 199, 0.02) 42%, transparent 72%);
+  pointer-events: none;
+  z-index: 1;
+  animation: haloBreathe 8s ease-in-out infinite alternate;
+}
+
+@keyframes haloBreathe {
+  0% { transform: translate(-50%, -52%) scale(0.92); opacity: 0.65; }
+  100% { transform: translate(-50%, -52%) scale(1.08); opacity: 1; }
+}
+
+/* 浮游微光星尘系统 */
+.splash-stardust-field {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.stardust {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--champagne-primary);
+  box-shadow: 0 0 6px var(--champagne-primary);
+  opacity: 0;
+  animation: stardustTwinkle linear infinite;
+}
+
+.stardust-1 { top: 26%; left: 20%; width: 2px; height: 2px; animation-duration: 4.2s; animation-delay: 0.5s; }
+.stardust-2 { top: 32%; right: 22%; width: 2.5px; height: 2.5px; animation-duration: 5.6s; animation-delay: 1.8s; }
+.stardust-3 { top: 66%; left: 28%; width: 1.8px; height: 1.8px; animation-duration: 3.8s; animation-delay: 2.2s; }
+.stardust-4 { top: 68%; right: 26%; width: 2.2px; height: 2.2px; animation-duration: 4.9s; animation-delay: 0.9s; }
+.stardust-5 { top: 18%; left: 52%; width: 1.5px; height: 1.5px; animation-duration: 6.2s; animation-delay: 3.1s; }
+
+@keyframes stardustTwinkle {
+  0%, 100% { opacity: 0; transform: translateY(0) scale(0.6); }
+  50% { opacity: 0.75; transform: translateY(-8px) scale(1.2); }
+}
+
 /* 极简高奢画廊建筑级极细框 (Haute Gallery Hairline Frame) */
 .gallery-hairline-frame {
   position: absolute;
@@ -87,6 +136,121 @@ html, body {
   pointer-events: none;
   z-index: 2;
   transition: opacity 0.3s ease;
+}
+
+/* 四角角标古典装饰折角 */
+.frame-corner {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  pointer-events: none;
+}
+
+.corner-tl {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--champagne-primary);
+  border-left: 2px solid var(--champagne-primary);
+}
+.corner-tl::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 3px;
+  height: 3px;
+  background: var(--champagne-primary);
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+.corner-tr {
+  top: -1px;
+  right: -1px;
+  border-top: 2px solid var(--champagne-primary);
+  border-right: 2px solid var(--champagne-primary);
+}
+.corner-tr::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 3px;
+  height: 3px;
+  background: var(--champagne-primary);
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+.corner-bl {
+  bottom: -1px;
+  left: -1px;
+  border-bottom: 2px solid var(--champagne-primary);
+  border-left: 2px solid var(--champagne-primary);
+}
+.corner-bl::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  width: 3px;
+  height: 3px;
+  background: var(--champagne-primary);
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+.corner-br {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid var(--champagne-primary);
+  border-right: 2px solid var(--champagne-primary);
+}
+.corner-br::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 3px;
+  height: 3px;
+  background: var(--champagne-primary);
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+/* 四边中点菱形微饰 */
+.frame-accent {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: var(--bg-deep);
+  border: 1px solid var(--champagne-primary);
+  transform: rotate(45deg);
+  box-shadow: 0 0 6px rgba(222, 214, 199, 0.4);
+}
+
+.accent-top {
+  top: -3px;
+  left: 50%;
+  margin-left: -2.5px;
+}
+
+.accent-bottom {
+  bottom: -3px;
+  left: 50%;
+  margin-left: -2.5px;
+}
+
+.accent-left {
+  left: -3px;
+  top: 50%;
+  margin-top: -2.5px;
+}
+
+.accent-right {
+  right: -3px;
+  top: 50%;
+  margin-top: -2.5px;
 }
 
 .splash-content {
@@ -98,44 +262,85 @@ html, body {
   align-items: center;
 }
 
-/* 极简黑曜石当代策展标识 (Obsidian Art Badge) */
-.splash-art-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 26px;
+/* 典藏纯几何徽标 (Emblem) */
+.splash-emblem {
+  width: 68px;
+  height: 68px;
+  margin-bottom: 24px;
+  color: var(--champagne-primary);
   opacity: 0;
-  animation: fadeUpIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s;
-  transition: opacity 0.3s ease;
+  animation: fadeUpIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.2s, emblemFloat 6s ease-in-out infinite alternate 1.2s;
+  will-change: transform, opacity;
 }
 
-.badge-dot {
-  width: 3.5px;
-  height: 3.5px;
-  border-radius: 50%;
-  background: var(--champagne-primary);
+.emblem-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.emblem-orbit-outer {
+  transform-origin: 60px 60px;
+  animation: orbitRotate 90s linear infinite;
+}
+
+.emblem-core-star {
+  filter: drop-shadow(0 0 5px rgba(222, 214, 199, 0.45));
+}
+
+.emblem-center-gem {
   box-shadow: 0 0 8px var(--champagne-primary);
 }
 
-.badge-text {
-  font-family: var(--font-mono);
-  font-size: clamp(0.65rem, 1.05vw, 0.78rem);
-  letter-spacing: 0.38em;
-  color: var(--champagne-primary);
-  text-transform: uppercase;
-  opacity: 0.9;
+@keyframes orbitRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-/* 主标题：奶蛙博物馆 (Haute Editorial Serif) */
+@keyframes emblemFloat {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-5px); }
+}
+
+/* 徽标与标题之间的微星芒金线 */
+.splash-ornament-upper {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUpIn 0.8s ease forwards 0.45s;
+}
+
+.ornament-line {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--champagne-primary));
+}
+
+.splash-ornament-upper .ornament-line:last-child {
+  background: linear-gradient(90deg, var(--champagne-primary), transparent);
+}
+
+.ornament-diamond {
+  width: 5px;
+  height: 5px;
+  background: var(--champagne-primary);
+  transform: rotate(45deg);
+  box-shadow: 0 0 6px var(--champagne-primary);
+}
+
+/* 主标题：奶娃博物馆 (Haute Editorial Serif) */
 .splash-title {
   font-family: var(--font-serif);
   font-size: clamp(3.6rem, 8.4vw, 7.2rem);
   font-weight: 700;
-  letter-spacing: 0.26em;
+  letter-spacing: 0.28em;
   line-height: 1.15;
   display: flex;
   align-items: center;
   justify-content: center;
+  white-space: nowrap;
   will-change: transform, opacity;
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
@@ -172,52 +377,89 @@ html, body {
   }
 }
 
-/* 极简艺术年代分割线 */
-.splash-art-divider {
-  display: inline-flex;
+/* 标题正下方古典对称双层几何饰件 (纯视觉装饰，无任何字符) */
+.splash-ornament-lower {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 16px;
-  margin-top: 20px;
+  gap: 9px;
+  margin-top: 28px;
   opacity: 0;
-  animation: fadeUpIn 0.8s ease forwards 0.95s;
-  transition: opacity 0.3s ease;
+  animation: fadeUpIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.95s;
 }
 
-.divider-dash {
-  width: 28px;
+.ornament-divider-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ornament-dash {
+  width: min(96px, 22vw);
   height: 1px;
   background: linear-gradient(to right, transparent, var(--champagne-primary));
 }
 
-.splash-art-divider .divider-dash:last-child {
+.ornament-divider-row .ornament-dash:last-child {
   background: linear-gradient(to left, transparent, var(--champagne-primary));
 }
 
-.divider-year {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.3em;
-  color: var(--champagne-primary);
-  opacity: 0.82;
+.ornament-rhombus-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.splash-subtitle {
-  font-family: var(--font-serif);
-  font-size: clamp(0.86rem, 1.5vw, 1.12rem);
-  letter-spacing: 0.42em;
-  color: var(--text-sub);
-  font-weight: 500;
-  margin-top: 20px;
-  opacity: 0;
-  animation: fadeUpIn 0.8s ease forwards 1.05s;
-  will-change: opacity;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
+.ornament-rhombus-group i {
+  display: block;
+  border: 1px solid var(--champagne-primary);
+  transform: rotate(45deg);
+  background: rgba(222, 214, 199, 0.15);
+  box-shadow: 0 0 6px rgba(222, 214, 199, 0.3);
 }
 
-/* 底部滚动展开微标 (全视口绝对居中) */
+.rhombus-sm {
+  width: 4.5px;
+  height: 4.5px;
+  opacity: 0.65;
+}
+
+.rhombus-lg {
+  width: 7.5px;
+  height: 7.5px;
+  background: var(--champagne-primary) !important;
+  box-shadow: 0 0 8px var(--champagne-primary) !important;
+}
+
+.ornament-sub-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0.55;
+}
+
+.ornament-sub-dash {
+  width: min(48px, 12vw);
+  height: 0.75px;
+  background: linear-gradient(to right, transparent, var(--champagne-muted));
+}
+
+.ornament-sub-row .ornament-sub-dash:last-child {
+  background: linear-gradient(to left, transparent, var(--champagne-muted));
+}
+
+.ornament-sub-dot {
+  display: block;
+  width: 2.5px;
+  height: 2.5px;
+  border-radius: 50%;
+  background: var(--champagne-primary);
+}
+
+/* 底部滚动展开微标 (全视口绝对居中，纯图形装饰与探索动效，去掉了全部文字) */
 .splash-scroll-hint {
   position: absolute;
-  bottom: 45px;
+  bottom: 42px;
   left: 0;
   right: 0;
   margin-inline: auto;
@@ -225,25 +467,16 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   cursor: pointer;
   opacity: 0;
-  animation: hintFadeUp 0.8s ease forwards 1.3s;
+  animation: hintFadeUp 0.8s ease forwards 1.25s;
   transition: transform 0.25s ease, opacity 0.25s ease;
   z-index: 3;
 }
 
 .splash-scroll-hint:hover {
   transform: translateY(-4px);
-}
-
-.splash-scroll-hint span {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 2.5px;
-  color: var(--champagne-light);
-  opacity: 0.85;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
 }
 
 .scroll-mouse-icon {
@@ -267,6 +500,41 @@ html, body {
   background: var(--champagne-primary);
   border-radius: 1px;
   animation: wheelScroll 1.6s infinite;
+}
+
+/* 纯视觉向下探索指引双折角 */
+.scroll-chevrons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  margin-top: 2px;
+}
+
+.chevron-line {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-right: 1.2px solid var(--champagne-primary);
+  border-bottom: 1.2px solid var(--champagne-primary);
+  transform: rotate(45deg);
+  opacity: 0;
+  animation: chevronPulse 1.8s ease-in-out infinite;
+}
+
+.chevron-1 {
+  animation-delay: 0s;
+}
+
+.chevron-2 {
+  animation-delay: 0.25s;
+  margin-top: -3px;
+}
+
+@keyframes chevronPulse {
+  0% { opacity: 0; transform: rotate(45deg) translate(-2px, -2px); }
+  50% { opacity: 0.85; transform: rotate(45deg) translate(0px, 0px); }
+  100% { opacity: 0; transform: rotate(45deg) translate(2px, 2px); }
 }
 
 @keyframes wheelScroll {
@@ -389,8 +657,12 @@ html, body {
   inset: 0;
   width: 100%;
   height: 100%;
-  will-change: transform, opacity, filter;
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), filter 0.75s ease;
+  overflow: hidden;
+  background-color: var(--bg-deep);
+  will-change: transform, filter;
+  transition: 
+    transform 0.78s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.78s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* 1. 当前名画全屏高度模糊填充背景 (Atmospheric Blurred Canvas Backdrop) */
@@ -707,39 +979,77 @@ html, body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-/* 画布层流转动画 */
-.canvas-layer.layer-enter-down {
-  opacity: 0;
-  transform: translateY(-36px) scale(1.03);
-  filter: blur(8px);
-}
+/* ==========================================================================
+   画布层纵向视差推入流转动画 (Vertical Parallax Curtain Transition)
+   ========================================================================== */
 
-.canvas-layer.layer-enter-up {
-  opacity: 0;
-  transform: translateY(36px) scale(1.03);
-  filter: blur(8px);
-}
-
+/* 1. 稳定活动图层 (Active Viewport Layer) */
 .canvas-layer.layer-active {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  filter: blur(0);
+  transform: translate3d(0, 0, 0) scale(1);
+  filter: brightness(1);
+  z-index: 2;
+  box-shadow: none;
+}
+
+/* 2. 纵向自下方推入 (向下切换 Next / 滚轮下滚 / 标签下移) */
+.canvas-layer.layer-enter-from-bottom {
+  transform: translate3d(0, 100%, 0) scale(1);
+  filter: brightness(1);
+  z-index: 2;
+  box-shadow: 0 -28px 80px rgba(0, 0, 0, 0.95);
+}
+
+/* 3. 纵向自上方推入 (向上切换 Prev / 滚轮上滚 / 标签上移) */
+.canvas-layer.layer-enter-from-top {
+  transform: translate3d(0, -100%, 0) scale(1);
+  filter: brightness(1);
+  z-index: 2;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.95);
+}
+
+/* 4. 旧图层以 35% 速度差速退至上方 (伴随轻微缩放与景深暗化，营造纵深感) */
+.canvas-layer.layer-exit-to-top {
+  transform: translate3d(0, -35%, 0) scale(0.94);
+  filter: brightness(0.62) blur(1px);
   z-index: 1;
+  pointer-events: none;
 }
 
-.canvas-layer.layer-exit-up {
-  opacity: 0;
-  transform: translateY(-36px) scale(0.98);
-  filter: blur(8px);
-  z-index: 0;
+/* 5. 旧图层以 35% 速度差速退至下方 (伴随轻微缩放与景深暗化，营造纵深感) */
+.canvas-layer.layer-exit-to-bottom {
+  transform: translate3d(0, 35%, 0) scale(0.94);
+  filter: brightness(0.62) blur(1px);
+  z-index: 1;
+  pointer-events: none;
 }
 
-.canvas-layer.layer-exit-down {
-  opacity: 0;
-  transform: translateY(36px) scale(0.98);
-  filter: blur(8px);
-  z-index: 0;
+/* 6. 内部装裱名画双重景深联动 (Nested Artwork Parallax) */
+.canvas-layer .canvas-artwork-wrapper {
+  will-change: transform;
+  transition: transform 0.78s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
+.canvas-layer.layer-enter-from-bottom .canvas-artwork-wrapper {
+  transform: translate3d(0, 12%, 0);
+}
+
+.canvas-layer.layer-enter-from-top .canvas-artwork-wrapper {
+  transform: translate3d(0, -12%, 0);
+}
+
+.canvas-layer.layer-active .canvas-artwork-wrapper {
+  transform: translate3d(0, 0, 0);
+}
+
+.canvas-layer.layer-exit-to-top .canvas-artwork-wrapper {
+  transform: translate3d(0, -8%, 0) scale(0.98);
+}
+
+.canvas-layer.layer-exit-to-bottom .canvas-artwork-wrapper {
+  transform: translate3d(0, 8%, 0) scale(0.98);
+}
+
+
 
 /* ==========================================================================
    E. 展厅悬浮交互界面 (Interface Frame)
@@ -997,12 +1307,37 @@ html, body {
   }
 
   .splash-title {
-    font-size: clamp(2.6rem, 12vw, 4.5rem);
+    font-size: clamp(2.4rem, 11vw, 4.2rem);
     letter-spacing: 0.18em;
   }
 
   .gallery-hairline-frame {
     inset: 16px;
+  }
+
+  .frame-corner {
+    width: 16px;
+    height: 16px;
+  }
+
+  .splash-emblem {
+    width: 52px;
+    height: 52px;
+    margin-bottom: 18px;
+  }
+
+  .splash-ornament-upper {
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .splash-ornament-upper .ornament-line {
+    width: 32px;
+  }
+
+  .splash-ornament-lower {
+    margin-top: 20px;
+    gap: 7px;
   }
 }
 
