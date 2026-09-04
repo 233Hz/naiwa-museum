@@ -292,7 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const gridToggleBtn = document.getElementById('btn-grid-toggle');
   const gridCloseBtn = document.getElementById('btn-grid-close');
 
-  // 1. 动态生成全部展品卡片（原 16 幅 + 本次新增 44 幅 = 60 幅）
+  // 1. 动态生成全部展品卡片（全馆共 63 幅典藏）
   function buildGridCards() {
     if (!gridGrid) return;
     gridGrid.innerHTML = '';

@@ -1,7 +1,6 @@
 /**
  * 经典艺术名画名作“奶蛙 / 奶龙”系列高清艺术展项数据集
- * 完整映射 assets/ 目录下的全部 60 幅名画拟态摄影与绘图素材
- * （原 16 幅 + 本次新增 44 幅）
+ * 完整映射 assets/ 目录下的全部 63 幅名画拟态摄影与绘图素材（全部采用 WebP 高性能压缩格式）
  */
 const GALLERY_ITEMS = [
   {
@@ -20,7 +19,7 @@ const GALLERY_ITEMS = [
     category: "Masterpiece / Leonardo da Vinci",
     accentColor: "#3CBA92",
     gradient: "linear-gradient(135deg, #131c15 0%, #2f4534 50%, #3cba92 100%)",
-    image: encodeURI("assets/蒙娜蛙.jpg")
+    image: encodeURI("assets/蒙娜蛙.webp")
   },
   {
     id: 3,
@@ -29,7 +28,7 @@ const GALLERY_ITEMS = [
     category: "Neoclassicism / Jacques-Louis David",
     accentColor: "#FF4E50",
     gradient: "linear-gradient(135deg, #2b0b0e 0%, #781d22 50%, #ff4e50 100%)",
-    image: encodeURI("assets/翻越阿尔卑斯.jpeg")
+    image: encodeURI("assets/翻越阿尔卑斯.webp")
   },
   {
     id: 4,
@@ -38,7 +37,7 @@ const GALLERY_ITEMS = [
     category: "High Renaissance / Leonardo da Vinci",
     accentColor: "#E0A96D",
     gradient: "linear-gradient(135deg, #241910 0%, #5e432d 50%, #e0a96d 100%)",
-    image: encodeURI("assets/最后的晚蛙.jpeg")
+    image: encodeURI("assets/最后的晚蛙.webp")
   },
   {
     id: 5,
@@ -47,7 +46,7 @@ const GALLERY_ITEMS = [
     category: "Sculpture / Auguste Rodin",
     accentColor: "#A8B2C1",
     gradient: "linear-gradient(135deg, #1a1e24 0%, #475569 50%, #a8b2c1 100%)",
-    image: encodeURI("assets/思想中的奶蛙.jpg")
+    image: encodeURI("assets/思想中的奶蛙.webp")
   },
   {
     id: 6,
@@ -56,7 +55,7 @@ const GALLERY_ITEMS = [
     category: "Surrealism / Salvador Dalí",
     accentColor: "#00F0FF",
     gradient: "linear-gradient(135deg, #0d2836 0%, #1e5a75 50%, #00f0ff 100%)",
-    image: encodeURI("assets/记忆中的奶蛙.jpg")
+    image: encodeURI("assets/记忆中的奶蛙.webp")
   },
   {
     id: 7,
@@ -74,7 +73,7 @@ const GALLERY_ITEMS = [
     category: "Traditional Chinese / Zhang Zeduan",
     accentColor: "#C2A649",
     gradient: "linear-gradient(135deg, #261f0d 0%, #635324 50%, #c2a649 100%)",
-    image: encodeURI("assets/清明上河蛙.jpeg")
+    image: encodeURI("assets/清明上河蛙.webp")
   },
   {
     id: 9,
@@ -83,7 +82,7 @@ const GALLERY_ITEMS = [
     category: "Romanticism / Théodore Géricault",
     accentColor: "#3A7BD5",
     gradient: "linear-gradient(135deg, #0d1e33 0%, #204675 50%, #3a7bd5 100%)",
-    image: encodeURI("assets/美杜莎之筏的蛙.jpeg")
+    image: encodeURI("assets/美杜莎之筏的蛙.webp")
   },
   {
     id: 10,
@@ -92,7 +91,7 @@ const GALLERY_ITEMS = [
     category: "Academic / Alexandre Cabanel",
     accentColor: "#7928CA",
     gradient: "linear-gradient(135deg, #1c0a2e 0%, #461b73 50%, #7928ca 100%)",
-    image: encodeURI("assets/堕天使之蛙.jpeg")
+    image: encodeURI("assets/堕天使之蛙.webp")
   },
   {
     id: 11,
@@ -101,7 +100,7 @@ const GALLERY_ITEMS = [
     category: "Sacred / Choir",
     accentColor: "#D4AF37",
     gradient: "linear-gradient(135deg, #29210a 0%, #6e5a1b 50%, #d4af37 100%)",
-    image: encodeURI("assets/圣咏的奶蛙.jpg")
+    image: encodeURI("assets/圣咏的奶蛙.webp")
   },
   {
     id: 12,
@@ -110,7 +109,7 @@ const GALLERY_ITEMS = [
     category: "Passionate / Dance",
     accentColor: "#FF0055",
     gradient: "linear-gradient(135deg, #330011 0%, #80002b 50%, #ff0055 100%)",
-    image: encodeURI("assets/探戈中的奶蛙.jpeg")
+    image: encodeURI("assets/探戈中的奶蛙.webp")
   },
   {
     id: 13,
@@ -119,7 +118,7 @@ const GALLERY_ITEMS = [
     category: "Celestial / Harmony",
     accentColor: "#67B26F",
     gradient: "linear-gradient(135deg, #112914 0%, #2e6634 50%, #67b26f 100%)",
-    image: encodeURI("assets/天堂咏叹的奶蛙.jpg")
+    image: encodeURI("assets/天堂咏叹的奶蛙.webp")
   },
   {
     id: 14,
@@ -128,7 +127,7 @@ const GALLERY_ITEMS = [
     category: "Modern / Space Odyssey",
     accentColor: "#00C9FF",
     gradient: "linear-gradient(135deg, #091e2e 0%, #15456b 50%, #00c9ff 100%)",
-    image: encodeURI("assets/宇航的奶蛙.jpeg")
+    image: encodeURI("assets/宇航的奶蛙.webp")
   },
   {
     id: 15,
@@ -137,7 +136,7 @@ const GALLERY_ITEMS = [
     category: "Cubism / Modern Art",
     accentColor: "#E65C00",
     gradient: "linear-gradient(135deg, #2b1100 0%, #7a3100 50%, #e65c00 100%)",
-    image: encodeURI("assets/立体之奶蛙.jpg")
+    image: encodeURI("assets/立体之奶蛙.webp")
   },
   {
     id: 16,
@@ -146,7 +145,7 @@ const GALLERY_ITEMS = [
     category: "Baroque / Classic",
     accentColor: "#8E2DE2",
     gradient: "linear-gradient(135deg, #1f0a33 0%, #4f1b80 50%, #8e2de2 100%)",
-    image: encodeURI("assets/受难之奶蛙.jpg")
+    image: encodeURI("assets/受难之奶蛙.webp")
   },
 
   /* ===== 本次新增 44 幅展品 (ids 17 - 60) ===== */
@@ -157,7 +156,7 @@ const GALLERY_ITEMS = [
     category: "Neoclassicism / Antonio Canova",
     accentColor: "#FBC2EB",
     gradient: "linear-gradient(135deg, #291224 0%, #753367 50%, #fbc2eb 100%)",
-    image: encodeURI("assets/丘比特和普赛克.jpeg")
+    image: encodeURI("assets/丘比特和普赛克.webp")
   },
   {
     id: 18,
@@ -175,7 +174,7 @@ const GALLERY_ITEMS = [
     category: "Mythology / Underworld",
     accentColor: "#3A7BD5",
     gradient: "linear-gradient(135deg, #0d1e33 0%, #204675 50%, #3a7bd5 100%)",
-    image: encodeURI("assets/俄耳甫斯和欧律狄刻.jpeg")
+    image: encodeURI("assets/俄耳甫斯和欧律狄刻.webp")
   },
   {
     id: 20,
@@ -184,7 +183,7 @@ const GALLERY_ITEMS = [
     category: "Medieval / Crusade",
     accentColor: "#C0392B",
     gradient: "linear-gradient(135deg, #2b0b0e 0%, #6e1d22 50%, #c0392b 100%)",
-    image: encodeURI("assets/十字军东征.jpeg")
+    image: encodeURI("assets/十字军东征.webp")
   },
   {
     id: 21,
@@ -193,7 +192,7 @@ const GALLERY_ITEMS = [
     category: "Epic / Fantasy",
     accentColor: "#00C9FF",
     gradient: "linear-gradient(135deg, #091e2e 0%, #15456b 50%, #00c9ff 100%)",
-    image: encodeURI("assets/千龙远征.jpeg")
+    image: encodeURI("assets/千龙远征.webp")
   },
   {
     id: 22,
@@ -202,7 +201,7 @@ const GALLERY_ITEMS = [
     category: "Fantasy / Ritual",
     accentColor: "#7928CA",
     gradient: "linear-gradient(135deg, #1c0a2e 0%, #461b73 50%, #7928ca 100%)",
-    image: encodeURI("assets/召唤奶龙.jpeg")
+    image: encodeURI("assets/召唤奶龙.webp")
   },
   {
     id: 23,
@@ -211,7 +210,7 @@ const GALLERY_ITEMS = [
     category: "Post-Impressionism / Van Gogh",
     accentColor: "#E8B53A",
     gradient: "linear-gradient(135deg, #2c2410 0%, #7d6a2b 50%, #e8b53a 100%)",
-    image: encodeURI("assets/向日葵.jpeg")
+    image: encodeURI("assets/向日葵.webp")
   },
   {
     id: 24,
@@ -220,7 +219,7 @@ const GALLERY_ITEMS = [
     category: "Expressionism / Edvard Munch",
     accentColor: "#00F0FF",
     gradient: "linear-gradient(135deg, #0d2836 0%, #1e5a75 50%, #00f0ff 100%)",
-    image: encodeURI("assets/呐喊.jpeg")
+    image: encodeURI("assets/呐喊.webp")
   },
   {
     id: 25,
@@ -229,7 +228,7 @@ const GALLERY_ITEMS = [
     category: "Sacred / Archangel",
     accentColor: "#D4AF37",
     gradient: "linear-gradient(135deg, #1a1407 0%, #5e4a1b 50%, #d4af37 100%)",
-    image: encodeURI("assets/圣米迦勒大天使长.jpeg")
+    image: encodeURI("assets/圣米迦勒大天使长.webp")
   },
   {
     id: 26,
@@ -238,7 +237,7 @@ const GALLERY_ITEMS = [
     category: "Romanticism / Encounter",
     accentColor: "#E75480",
     gradient: "linear-gradient(135deg, #2c0f1a 0%, #7a2440 50%, #e75480 100%)",
-    image: encodeURI("assets/塔楼楼梯上的相遇.jpeg")
+    image: encodeURI("assets/塔楼楼梯上的相遇.webp")
   },
   {
     id: 27,
@@ -247,7 +246,7 @@ const GALLERY_ITEMS = [
     category: "Orientalist / Poetry",
     accentColor: "#C2A649",
     gradient: "linear-gradient(135deg, #221c0a 0%, #5e4f20 50%, #c2a649 100%)",
-    image: encodeURI("assets/塞利姆与祖蕾卡.jpeg")
+    image: encodeURI("assets/塞利姆与祖蕾卡.webp")
   },
   {
     id: 28,
@@ -256,7 +255,7 @@ const GALLERY_ITEMS = [
     category: "Sacred / Resurrection",
     accentColor: "#67B26F",
     gradient: "linear-gradient(135deg, #112914 0%, #2e6634 50%, #67b26f 100%)",
-    image: encodeURI("assets/复活.jpeg")
+    image: encodeURI("assets/复活.webp")
   },
   {
     id: 29,
@@ -265,7 +264,7 @@ const GALLERY_ITEMS = [
     category: "Baroque / Rembrandt",
     accentColor: "#E0A96D",
     gradient: "linear-gradient(135deg, #1e1409 0%, #5e432d 50%, #e0a96d 100%)",
-    image: encodeURI("assets/夜巡.jpeg")
+    image: encodeURI("assets/夜巡.webp")
   },
   {
     id: 30,
@@ -283,7 +282,7 @@ const GALLERY_ITEMS = [
     category: "Sacred / Innocence",
     accentColor: "#E8C99B",
     gradient: "linear-gradient(135deg, #1c160c 0%, #5e4f2d 50%, #e8c99b 100%)",
-    image: encodeURI("assets/奶娃与天使.jpeg")
+    image: encodeURI("assets/奶娃与天使.webp")
   },
   {
     id: 32,
@@ -292,7 +291,7 @@ const GALLERY_ITEMS = [
     category: "Sacred / Redemption",
     accentColor: "#C9A24B",
     gradient: "linear-gradient(135deg, #1a1407 0%, #5e4a1b 50%, #c9a24b 100%)",
-    image: encodeURI("assets/奶娃的救赎.jpeg")
+    image: encodeURI("assets/奶娃的救赎.webp")
   },
   {
     id: 33,
@@ -301,7 +300,7 @@ const GALLERY_ITEMS = [
     category: "Sacred / Banquet",
     accentColor: "#8E2DE2",
     gradient: "linear-gradient(135deg, #1f0a33 0%, #4f1b80 50%, #8e2de2 100%)",
-    image: encodeURI("assets/奶拉之死.jpeg")
+    image: encodeURI("assets/奶拉之死.webp")
   },
   {
     id: 34,
@@ -328,7 +327,7 @@ const GALLERY_ITEMS = [
     category: "Neoclassicism / Coronation",
     accentColor: "#D4AF37",
     gradient: "linear-gradient(135deg, #1e1605 0%, #6e581a 50%, #d4af37 100%)",
-    image: encodeURI("assets/奶破龙一世加冕大典.jpeg")
+    image: encodeURI("assets/奶破龙一世加冕大典.webp")
   },
   {
     id: 37,
@@ -337,7 +336,7 @@ const GALLERY_ITEMS = [
     category: "History / Battlefield",
     accentColor: "#FF4E50",
     gradient: "linear-gradient(135deg, #2b0b0e 0%, #781d22 50%, #ff4e50 100%)",
-    image: encodeURI("assets/奶破龙在战场.jpeg")
+    image: encodeURI("assets/奶破龙在战场.webp")
   },
   {
     id: 38,
@@ -346,7 +345,7 @@ const GALLERY_ITEMS = [
     category: "History / Battle of Arcole",
     accentColor: "#2E86DE",
     gradient: "linear-gradient(135deg, #0d1e33 0%, #204675 50%, #2e86de 100%)",
-    image: encodeURI("assets/奶破龙在阿尔柯桥上.jpeg")
+    image: encodeURI("assets/奶破龙在阿尔柯桥上.webp")
   },
   {
     id: 39,
@@ -355,7 +354,7 @@ const GALLERY_ITEMS = [
     category: "Neoclassicism / Jacques-Louis David",
     accentColor: "#C9A24B",
     gradient: "linear-gradient(135deg, #1e1605 0%, #6e581a 50%, #c9a24b 100%)",
-    image: encodeURI("assets/奶破龙的加冕典礼.jpeg")
+    image: encodeURI("assets/奶破龙的加冕典礼.webp")
   },
   {
     id: 40,
@@ -364,7 +363,7 @@ const GALLERY_ITEMS = [
     category: "Neoclassicism / Jacques-Louis David",
     accentColor: "#4FC3F7",
     gradient: "linear-gradient(135deg, #091e2e 0%, #15456b 50%, #4fc3f7 100%)",
-    image: encodeURI("assets/奶破龙翻越阿尔卑斯山.jpeg")
+    image: encodeURI("assets/奶破龙翻越阿尔卑斯山.webp")
   },
   {
     id: 41,
@@ -373,7 +372,7 @@ const GALLERY_ITEMS = [
     category: "Romanticism / Théodore Géricault",
     accentColor: "#1E6091",
     gradient: "linear-gradient(135deg, #0d1e33 0%, #204675 50%, #1e6091 100%)",
-    image: encodeURI("assets/奶龙之筏.jpeg")
+    image: encodeURI("assets/奶龙之筏.webp")
   },
   {
     id: 42,
@@ -382,7 +381,7 @@ const GALLERY_ITEMS = [
     category: "Celestial / Ascension",
     accentColor: "#E6E1D2",
     gradient: "linear-gradient(135deg, #181a16 0%, #4a4a3a 50%, #e6e1d2 100%)",
-    image: encodeURI("assets/奶龙什天.jpeg")
+    image: encodeURI("assets/奶龙什天.webp")
   },
   {
     id: 43,
@@ -400,7 +399,7 @@ const GALLERY_ITEMS = [
     category: "Renaissance / Raphael",
     accentColor: "#B8860B",
     gradient: "linear-gradient(135deg, #221c0a 0%, #5e4f20 50%, #b8860b 100%)",
-    image: encodeURI("assets/奶龙学院.jpeg")
+    image: encodeURI("assets/奶龙学院.webp")
   },
   {
     id: 45,
@@ -418,7 +417,7 @@ const GALLERY_ITEMS = [
     category: "Sacred / Pilgrimage",
     accentColor: "#4CAF7D",
     gradient: "linear-gradient(135deg, #112914 0%, #2e6634 50%, #4caf7d 100%)",
-    image: encodeURI("assets/奶龙朝圣.jpeg")
+    image: encodeURI("assets/奶龙朝圣.webp")
   },
   {
     id: 47,
@@ -436,7 +435,7 @@ const GALLERY_ITEMS = [
     category: "History / Legend",
     accentColor: "#6A0DAD",
     gradient: "linear-gradient(135deg, #1c0a2e 0%, #461b73 50%, #6a0dad 100%)",
-    image: encodeURI("assets/奶龙雷帝杀龙.jpeg")
+    image: encodeURI("assets/奶龙雷帝杀龙.webp")
   },
   {
     id: 49,
@@ -454,7 +453,7 @@ const GALLERY_ITEMS = [
     category: "Baroque / Johannes Vermeer",
     accentColor: "#87A0C0",
     gradient: "linear-gradient(135deg, #161a20 0%, #3a4250 50%, #87a0c0 100%)",
-    image: encodeURI("assets/带珍珠耳环的奶龙.jpeg")
+    image: encodeURI("assets/带珍珠耳环的奶龙.webp")
   },
   {
     id: 51,
@@ -463,7 +462,7 @@ const GALLERY_ITEMS = [
     category: "Romanticism / Karl Bryullov",
     accentColor: "#E25822",
     gradient: "linear-gradient(135deg, #2b0b0e 0%, #781d22 50%, #e25822 100%)",
-    image: encodeURI("assets/庞贝城的末日.jpeg")
+    image: encodeURI("assets/庞贝城的末日.webp")
   },
   {
     id: 52,
@@ -490,7 +489,7 @@ const GALLERY_ITEMS = [
     category: "Impressionism / Claude Monet",
     accentColor: "#4DD0E1",
     gradient: "linear-gradient(135deg, #091e2e 0%, #15456b 50%, #4dd0e1 100%)",
-    image: encodeURI("assets/撑阳伞的奶龙.jpeg")
+    image: encodeURI("assets/撑阳伞的奶龙.webp")
   },
   {
     id: 55,
@@ -499,7 +498,7 @@ const GALLERY_ITEMS = [
     category: "Post-Impressionism / Van Gogh",
     accentColor: "#E0C341",
     gradient: "linear-gradient(135deg, #0d1626 0%, #1e3a4a 50%, #e0c341 100%)",
-    image: encodeURI("assets/星空.jpeg")
+    image: encodeURI("assets/星空.webp")
   },
   {
     id: 56,
@@ -508,7 +507,7 @@ const GALLERY_ITEMS = [
     category: "Renaissance / Sandro Botticelli",
     accentColor: "#8BC34A",
     gradient: "linear-gradient(135deg, #112914 0%, #2e4a34 50%, #8bc34a 100%)",
-    image: encodeURI("assets/春光.jpeg")
+    image: encodeURI("assets/春光.webp")
   },
   {
     id: 57,
@@ -517,7 +516,7 @@ const GALLERY_ITEMS = [
     category: "Romanticism / Eugène Delacroix",
     accentColor: "#4A90D9",
     gradient: "linear-gradient(135deg, #0d1e33 0%, #204675 50%, #4a90d9 100%)",
-    image: encodeURI("assets/自由引导奶龙.jpeg")
+    image: encodeURI("assets/自由引导奶龙.webp")
   },
   {
     id: 58,
@@ -544,7 +543,34 @@ const GALLERY_ITEMS = [
     category: "Biblical / Genesis",
     accentColor: "#6B7A8F",
     gradient: "linear-gradient(135deg, #161a20 0%, #3a4250 50%, #6b7a8f 100%)",
-    image: encodeURI("assets/雅各与天使搏斗.jpeg")
+    image: encodeURI("assets/雅各与天使搏斗.webp")
+  },
+  {
+    id: 61,
+    title: "奶云",
+    subtitle: "单骑救主孤胆银枪",
+    category: "Three Kingdoms / Zhao Yun",
+    accentColor: "#E5B842",
+    gradient: "linear-gradient(135deg, #2b220d 0%, #69511b 50%, #e5b842 100%)",
+    image: encodeURI("assets/奶云.webp")
+  },
+  {
+    id: 62,
+    title: "奶超",
+    subtitle: "西凉神威紫电雷鸣",
+    category: "Three Kingdoms / Ma Chao",
+    accentColor: "#7B68EE",
+    gradient: "linear-gradient(135deg, #1b122e 0%, #3e286e 50%, #7b68ee 100%)",
+    image: encodeURI("assets/奶超.webp")
+  },
+  {
+    id: 63,
+    title: "奶瑜",
+    subtitle: "江东雄姿剑指千峰",
+    category: "Three Kingdoms / Zhou Yu",
+    accentColor: "#2E86DE",
+    gradient: "linear-gradient(135deg, #0c1c2e 0%, #173d61 50%, #2e86de 100%)",
+    image: encodeURI("assets/奶瑜.webp")
   }
 ];
 
